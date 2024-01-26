@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 	"testAPI/models"
@@ -38,6 +39,7 @@ func (h *handler) GetPeople(c *gin.Context) {
 		newResponseError(c, http.StatusInternalServerError, err.Error())
 		return
 	}
+	log.Printf("Request response: %v\n", people)
 	c.JSON(http.StatusOK, people)
 }
 
@@ -63,7 +65,7 @@ func (h *handler) CreatePerson(c *gin.Context) {
 		newResponseError(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-
+	log.Printf("New person created: %v\n", input)
 	c.JSON(http.StatusOK, input)
 }
 
@@ -79,7 +81,7 @@ func (h *handler) DeletePerson(c *gin.Context) {
 		newResponseError(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-
+	log.Printf("Person with id %v was deleted\n", id)
 	c.Status(http.StatusOK)
 }
 
@@ -101,5 +103,6 @@ func (h *handler) UpdatePerson(c *gin.Context) {
 		newResponseError(c, http.StatusInternalServerError, err.Error())
 		return
 	}
+	log.Printf("Person with id %v updated: %v", id, input)
 	c.Status(http.StatusOK)
 }

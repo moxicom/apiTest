@@ -25,7 +25,7 @@ func main() {
 	if len(os.Args) >= 2 {
 		command := os.Args[1]
 		switch command {
-		case "migrate":
+		case "migration":
 			if err := repository.RunMigration(db); err != nil {
 				panic(err)
 			}
